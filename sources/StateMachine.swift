@@ -57,25 +57,23 @@ extension StateMachine {
     func setupAndOpenPortWithSelectionString(_ selectionString: String, availablePorts: [ORSSerialPort]) -> Bool {
         var selectionString = selectionString
         selectionString = selectionString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if let index = Int(selectionString) {
-            let clampedIndex = min(max(index, 0), availablePorts.count - 1)
-            serialPort = availablePorts[clampedIndex]
-            return true
-        } else {
+        guard let index = Int(selectionString) else {
             return false
         }
+        let clampedIndex = min(max(index, 0), availablePorts.count - 1)
+        serialPort = availablePorts[clampedIndex]
+        return true
     }
 
     func setBaudRateOnPortWithString(_ selectionString: String) -> Bool {
         var selectionString = selectionString
         selectionString = selectionString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if let baudRate = Int(selectionString) {
-            serialPort?.baudRate = NSNumber(value: baudRate)
-            print("Baud rate set to \(baudRate)", terminator: "")
-            return true
-        } else {
+        guard let baudRate = Int(selectionString) else {
             return false
         }
+        serialPort?.baudRate = NSNumber(value: baudRate)
+        print("Baud rate set to \(baudRate)", terminator: "")
+        return true
     }
 }
 
@@ -83,36 +81,63 @@ extension StateMachine {
 
 extension StateMachine {
     func handleUserInput(_ dataFromUser: Data) {
-        if let string = NSString(data: dataFromUser, encoding: String.Encoding.utf8.rawValue) as String? {
-            if string.lowercased().hasPrefix("exit") ||
-                string.lowercased().hasPrefix("quit") {
-                print("Quitting...")
-                exit(EXIT_SUCCESS)
-            }
-
-            switch currentState {
-            case let .waitingForPortSelectionState(availablePorts):
-                if !setupAndOpenPortWithSelectionString(string, availablePorts: availablePorts) {
-                    print("\nError: Invalid port selection.", terminator: "")
-                    UserPrompter.promptForSerialPort()
-                    return
-                }
-            case .waitingForBaudRateInputState:
-                if !setBaudRateOnPortWithString(string) {
-                    print("\nError: Invalid baud rate.", terminator: "")
-                    print("Baud rate should consist only of numeric digits.", terminator: "")
-                    UserPrompter.promptForBaudRate()
-                    return
-                }
-                currentState = .waitingForUserInputState
-                UserPrompter.printPrompt()
-            case .waitingForUserInputState:
-                serialPort?.send(dataFromUser)
-                UserPrompter.printPrompt()
-            default:
-                break
-            }
+        guard let string = NSString(data: dataFromUser, encoding: String.Encoding.utf8.rawValue) as String? else {
+            return
         }
+
+        if string.lowercased().hasPrefix("exit") || string.lowercased().hasPrefix("quit") {
+            print("Quitting...")
+            exit(EXIT_SUCCESS)
+        }
+
+        switch currentState {
+        case let .waitingForPortSelectionState(availablePorts):
+            if !setupAndOpenPortWithSelectionString(string, availablePorts: availablePorts) {
+                print("\nError: Invalid port selection.", terminator: "")
+                UserPrompter.promptForSerialPort()
+                return
+            }
+        case .waitingForBaudRateInputState:
+            if !setBaudRateOnPortWithString(string) {
+                print("\nError: Invalid baud rate.", terminator: "")
+                print("Baud rate should consist only of numeric digits.", terminator: "")
+                UserPrompter.promptForBaudRate()
+                return
+            }
+            currentState = .waitingForUserInputState
+            UserPrompter.printPrompt()
+        case .waitingForUserInputState:
+            serialPort?.send(dataFromUser)
+            UserPrompter.printPrompt()
+        default:
+            break
+        }
+    }
+
+    func handleReceivedData(_ receivedData: Data) {
+        guard let string = NSString(data: receivedData, encoding: String.Encoding.utf8.rawValue) as String? else {
+            return
+        }
+
+        print("\nReceived: \"\(string)\" \(receivedData)", terminator: "")
+
+        let appPrefix = "app:"
+        if string.hasPrefix(appPrefix) {
+            let app = String(string.dropFirst(appPrefix.count))
+            open(app)
+            return
+        }
+    }
+
+    func open(_ app: String) {
+        guard app.count > 0 else {
+            return
+        }
+        print("Opening \(app) ...")
+        let task = Process()
+        task.launchPath = "/usr/bin/open"
+        task.arguments = ["-a", app]
+        task.launch()
     }
 }
 
@@ -120,9 +145,7 @@ extension StateMachine {
 
 extension StateMachine: ORSSerialPortDelegate {
     func serialPort(_: ORSSerialPort, didReceive data: Data) {
-        if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-            print("\nReceived: \"\(string)\" \(data)", terminator: "")
-        }
+        handleReceivedData(data)
         UserPrompter.printPrompt()
     }
 
