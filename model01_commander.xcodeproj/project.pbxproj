@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		196FA0FD2091D191003496CF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FA0FC2091D191003496CF /* main.swift */; };
+		196FA12F2091D439003496CF /* ORSSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1252091D438003496CF /* ORSSerialPort.m */; };
+		196FA1302091D439003496CF /* ORSSerialPortManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1272091D438003496CF /* ORSSerialPortManager.m */; };
+		196FA1312091D439003496CF /* ORSSerialBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1292091D438003496CF /* ORSSerialBuffer.m */; };
+		196FA1322091D439003496CF /* ORSSerialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA12A2091D439003496CF /* ORSSerialRequest.m */; };
+		196FA1332091D439003496CF /* ORSSerialPacketDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA12C2091D439003496CF /* ORSSerialPacketDescriptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,17 @@
 /* Begin PBXFileReference section */
 		196FA0F92091D191003496CF /* model01_commander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = model01_commander; sourceTree = BUILT_PRODUCTS_DIR; };
 		196FA0FC2091D191003496CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		196FA1152091D324003496CF /* model01_commander-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "model01_commander-Bridging-Header.h"; sourceTree = "<group>"; };
+		196FA1252091D438003496CF /* ORSSerialPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialPort.m; sourceTree = "<group>"; };
+		196FA1262091D438003496CF /* ORSSerialRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialRequest.h; sourceTree = "<group>"; };
+		196FA1272091D438003496CF /* ORSSerialPortManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialPortManager.m; sourceTree = "<group>"; };
+		196FA1282091D438003496CF /* ORSSerialPacketDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialPacketDescriptor.h; sourceTree = "<group>"; };
+		196FA1292091D438003496CF /* ORSSerialBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialBuffer.m; sourceTree = "<group>"; };
+		196FA12A2091D439003496CF /* ORSSerialRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialRequest.m; sourceTree = "<group>"; };
+		196FA12B2091D439003496CF /* ORSSerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialPort.h; sourceTree = "<group>"; };
+		196FA12C2091D439003496CF /* ORSSerialPacketDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialPacketDescriptor.m; sourceTree = "<group>"; };
+		196FA12D2091D439003496CF /* ORSSerialPortManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialPortManager.h; sourceTree = "<group>"; };
+		196FA12E2091D439003496CF /* ORSSerialBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialBuffer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +57,8 @@
 		196FA0F02091D191003496CF = {
 			isa = PBXGroup;
 			children = (
-				196FA0FB2091D191003496CF /* model01_commander */,
+				196FA0FB2091D191003496CF /* sources */,
+				196FA1132091D2E7003496CF /* dependencies */,
 				196FA0FA2091D191003496CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,12 +71,39 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		196FA0FB2091D191003496CF /* model01_commander */ = {
+		196FA0FB2091D191003496CF /* sources */ = {
 			isa = PBXGroup;
 			children = (
 				196FA0FC2091D191003496CF /* main.swift */,
+				196FA1152091D324003496CF /* model01_commander-Bridging-Header.h */,
 			);
-			path = model01_commander;
+			path = sources;
+			sourceTree = "<group>";
+		};
+		196FA1132091D2E7003496CF /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				196FA1142091D2F8003496CF /* ORSSerialPort */,
+			);
+			name = dependencies;
+			sourceTree = "<group>";
+		};
+		196FA1142091D2F8003496CF /* ORSSerialPort */ = {
+			isa = PBXGroup;
+			children = (
+				196FA12E2091D439003496CF /* ORSSerialBuffer.h */,
+				196FA1292091D438003496CF /* ORSSerialBuffer.m */,
+				196FA1282091D438003496CF /* ORSSerialPacketDescriptor.h */,
+				196FA12C2091D439003496CF /* ORSSerialPacketDescriptor.m */,
+				196FA12B2091D439003496CF /* ORSSerialPort.h */,
+				196FA1252091D438003496CF /* ORSSerialPort.m */,
+				196FA12D2091D439003496CF /* ORSSerialPortManager.h */,
+				196FA1272091D438003496CF /* ORSSerialPortManager.m */,
+				196FA1262091D438003496CF /* ORSSerialRequest.h */,
+				196FA12A2091D439003496CF /* ORSSerialRequest.m */,
+			);
+			name = ORSSerialPort;
+			path = dependencies/ORSSerialPort/Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +138,7 @@
 				TargetAttributes = {
 					196FA0F82091D191003496CF = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 				};
 			};
@@ -119,7 +164,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196FA12F2091D439003496CF /* ORSSerialPort.m in Sources */,
 				196FA0FD2091D191003496CF /* main.swift in Sources */,
+				196FA1322091D439003496CF /* ORSSerialRequest.m in Sources */,
+				196FA1302091D439003496CF /* ORSSerialPortManager.m in Sources */,
+				196FA1312091D439003496CF /* ORSSerialBuffer.m in Sources */,
+				196FA1332091D439003496CF /* ORSSerialPacketDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,9 +292,17 @@
 		196FA1012091D191003496CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sources/model01_commander-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -252,9 +310,16 @@
 		196FA1022091D191003496CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2TV9GXC7CB;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sources/model01_commander-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

@@ -1,0 +1,3 @@
+[submodule "dependencies/ORSSerialPort"]
+	path = dependencies/ORSSerialPort
+	url = https://github.com/armadsen/ORSSerialPort.git
