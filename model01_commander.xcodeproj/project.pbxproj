@@ -13,6 +13,8 @@
 		196FA1312091D439003496CF /* ORSSerialBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1292091D438003496CF /* ORSSerialBuffer.m */; };
 		196FA1322091D439003496CF /* ORSSerialRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA12A2091D439003496CF /* ORSSerialRequest.m */; };
 		196FA1332091D439003496CF /* ORSSerialPacketDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 196FA12C2091D439003496CF /* ORSSerialPacketDescriptor.m */; };
+		196FA1352091DB16003496CF /* UserPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1342091DB16003496CF /* UserPrompter.swift */; };
+		196FA1372091DB6E003496CF /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196FA1362091DB6E003496CF /* StateMachine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +43,8 @@
 		196FA12C2091D439003496CF /* ORSSerialPacketDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORSSerialPacketDescriptor.m; sourceTree = "<group>"; };
 		196FA12D2091D439003496CF /* ORSSerialPortManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialPortManager.h; sourceTree = "<group>"; };
 		196FA12E2091D439003496CF /* ORSSerialBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORSSerialBuffer.h; sourceTree = "<group>"; };
+		196FA1342091DB16003496CF /* UserPrompter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrompter.swift; sourceTree = "<group>"; };
+		196FA1362091DB6E003496CF /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				196FA0FC2091D191003496CF /* main.swift */,
+				196FA1342091DB16003496CF /* UserPrompter.swift */,
+				196FA1362091DB6E003496CF /* StateMachine.swift */,
 				196FA1152091D324003496CF /* model01_commander-Bridging-Header.h */,
 			);
 			path = sources;
@@ -166,6 +172,8 @@
 			files = (
 				196FA12F2091D439003496CF /* ORSSerialPort.m in Sources */,
 				196FA0FD2091D191003496CF /* main.swift in Sources */,
+				196FA1352091DB16003496CF /* UserPrompter.swift in Sources */,
+				196FA1372091DB6E003496CF /* StateMachine.swift in Sources */,
 				196FA1322091D439003496CF /* ORSSerialRequest.m in Sources */,
 				196FA1302091D439003496CF /* ORSSerialPortManager.m in Sources */,
 				196FA1312091D439003496CF /* ORSSerialBuffer.m in Sources */,
