@@ -121,10 +121,16 @@ extension StateMachine {
 
         print("\nReceived: \"\(string)\" \(receivedData)", terminator: "")
 
-        let appPrefix = "app:"
+        let appPrefix = "APP:"
         if string.hasPrefix(appPrefix) {
             let app = String(string.dropFirst(appPrefix.count))
             open(app)
+            return
+        }
+
+        let timeRequest = "TIME_REQUEST"
+        if string == timeRequest {
+            sendCurrentTime()
             return
         }
     }
@@ -138,6 +144,20 @@ extension StateMachine {
         task.launchPath = "/usr/bin/open"
         task.arguments = ["-a", app]
         task.launch()
+    }
+
+    func sendCurrentTime() {
+        guard let time = Int(exactly: Date().timeIntervalSince1970) else {
+            print("Failed to create timestamp)")
+            return
+        }
+        let string = "T\(time)\n"
+        guard let data = string.data(using: .utf8) else {
+            print("Failed to send timestamp: \(string)")
+            return
+        }
+        print("Sending timestamp: \(string)")
+        serialPort?.send(data)
     }
 }
 
