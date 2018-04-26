@@ -18,7 +18,6 @@ enum ApplicationState {
 class StateMachine: NSObject {
     var currentState = ApplicationState.initializationState
     let standardInputFileHandle = FileHandle.standardInput
-    let prompter = UserPrompter()
 
     var serialPort: ORSSerialPort? {
         didSet {
@@ -39,11 +38,12 @@ class StateMachine: NSObject {
         UserPrompter.printIntroduction()
 
         let availablePorts = ORSSerialPortManager.shared().availablePorts
-        if availablePorts.count == 0 {
+        guard availablePorts.count > 0 else {
             print("No connected serial ports found.")
             print("Please connect your USB to serial adapter(s) and run the program again.\n")
-            exit(EXIT_SUCCESS)
+            exit(EXIT_FAILURE)
         }
+
         UserPrompter.promptForSerialPort()
         currentState = .waitingForPortSelectionState(availablePorts)
 
